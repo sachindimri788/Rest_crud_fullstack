@@ -11,7 +11,7 @@ document.getElementById('myForm').addEventListener('submit', async (event) => {
   };
   if (id === '') {
     try {
-      await axios.post('http://localhost:3000', obj);
+      await axios.post('http://localhost:3000/user', obj);
       await displayData();
       form.reset();
     } catch (error) {
@@ -19,7 +19,7 @@ document.getElementById('myForm').addEventListener('submit', async (event) => {
     }
   } else {
     try {
-      await axios.put(`http://localhost:3000/${id}`, obj);
+      await axios.put(`http://localhost:3000/user/${id}`, obj);
       await displayData();
       form.reset();
     } catch (error) {
@@ -31,7 +31,7 @@ document.getElementById('myForm').addEventListener('submit', async (event) => {
 
 async function displayData() {
   try {
-    const response = await axios.get('http://localhost:3000');
+    const response = await axios.get('http://localhost:3000/user');
     const uList = document.getElementById('uList');
     uList.innerHTML = '';
     const data = response.data;
@@ -64,7 +64,7 @@ async function displayData() {
 async function deleteData(id) {
     console.log(id)
   try {
-    await axios.delete(`http://localhost:3000/${id}`);
+    await axios.delete(`http://localhost:3000/user/${id}`);
     await displayData();
   } catch (error) {
     console.error(error);
@@ -73,14 +73,14 @@ async function deleteData(id) {
 
 async function editData(editId) {
   try {
-    const response = await axios.get('http://localhost:3000');
+    const response = await axios.get('http://localhost:3000/user');
     const data = response.data;
     if (data !== null) {
       const user = data.find((item) => item.id === editId);
       if (user) {
         document.getElementById('name').value = user.name;
         document.getElementById('email').value = user.email;
-        id = user.id; // Assign the global id variable the updated value
+        id = user.id; 
       }
     }
   } catch (error) {

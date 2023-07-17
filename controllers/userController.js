@@ -42,9 +42,7 @@ exports.updateUser = async (req, res) => {
 exports.delteUser = async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
         const user = await User.findOne({ where: { id } });
-        console.log(user);
         await user.destroy();
         return res.json({ message: "success" });
     } catch (e) {
